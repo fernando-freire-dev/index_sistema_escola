@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Educacionais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e74fd 0%, #0d47a1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .system-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+            animation-fill-mode: both;
+        }
+
+        .system-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .system-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 116, 253, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .system-card:hover::before {
+            left: 100%;
+        }
+
+        .system-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(30, 116, 253, 0.3);
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #1e74fd 0%, #0d47a1 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 20px rgba(30, 116, 253, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .system-card:hover .icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(30, 116, 253, 0.4);
+        }
+
+        .system-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1e74fd 0%, #0d47a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .system-description {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            min-height: 80px;
+        }
+
+        .access-button {
+            display: inline-block;
+            padding: 16px 50px;
+            background: linear-gradient(135deg, #1e74fd 0%, #0d47a1 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 116, 253, 0.4);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .access-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s;
+        }
+
+        .access-button:hover::before {
+            left: 100%;
+        }
+
+        .access-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 116, 253, 0.5);
+        }
+
+        .access-button:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            animation: fadeIn 1s ease 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .systems-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .system-card {
+                padding: 40px 30px;
+            }
+
+            .system-title {
+                font-size: 1.6rem;
+            }
+
+            .system-description {
+                min-height: auto;
+            }
+        }
+
+        /* Badge de funcionalidades */
+        .features-badge {
+            display: inline-block;
+            background: rgba(30, 116, 253, 0.1);
+            color: #1e74fd;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">Sistemas Educacionais</div>
+            <div class="subtitle">Gestão Escolar Moderna e Eficiente</div>
+        </div>
+
+        <div class="systems-grid">
+            <!-- Carômetro -->
+            <div class="system-card">
+                <div class="icon">📸</div>
+                <div class="features-badge">Gestão Visual</div>
+                <h2 class="system-title">Carômetro</h2>
+                <p class="system-description">
+                    Organize e gerencie fotos de todos os alunos por turma. 
+                    Sistema completo com perfis de coordenador e professor 
+                    para visualização e administração de alunos do ensino médio.
+                </p>
+                <a href="#" class="access-button">Acessar Sistema</a>
+            </div>
+
+            <!-- Conselho de Classe -->
+            <div class="system-card">
+                <div class="icon">📋</div>
+                <div class="features-badge">Gestão Completa</div>
+                <h2 class="system-title">Conselho de Classe</h2>
+                <p class="system-description">
+                    Ferramenta completa para gestão de conselhos de classe. 
+                    Gerencie notas, faltas, disciplinas e realize conselhos com 
+                    perfis diferenciados para admin, coordenador e professor.
+                </p>
+                <a href="#" class="access-button">Acessar Sistema</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            Desenvolvido com 💙 por <a href="https://github.com/fernando-freire-dev" target="_blank">Fernando Freire</a>
+        </div>
+    </div>
+
+    <script>
+        // Create animated particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Update button links when domains are configured
+        // Replace '#' with your actual subdomain URLs:
+        // Example: 
+        // document.querySelectorAll('.access-button')[0].href = 'https://carometro.seudominio.com.br';
+        // document.querySelectorAll('.access-button')[1].href = 'https://conselho.seudominio.com.br';
+    </script>
+</body>
+</html>
